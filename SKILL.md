@@ -3,7 +3,7 @@ name: drama-creative-intelligence
 description: Director-Level Drama Creative Intelligence。唯一 Creative Director / Director Core，以持续记忆、可演化世界状态、六层角色 DNA（Identity/Psychology/Visual/Voice/Relationship/Arc）、因果图谱与六类导演智能（意图/戏剧/人物/视觉/因果/创意判断）做导演级判断，统一 Story、World、Character、Visual、Storyboard、Image、Video、Sound、Edit、Continuity、Production 与 QA，按需以 Presentation / Editorial Art Direction 输出故事圣经、Lookbook、提案与发行视觉。支持从创意、授权原著、剧本、镜头、资产或成片进入，持续生产跨集连续、可追溯、可复用、可迭代的 AI 漫剧、短剧、剧集、广告与电影。不是多 Agent 岗位拼装、剧本模板、提示词库、网站模板、流程路由器或规则执行系统。
 license: Apache-2.0
 metadata:
-  version: 6.2.0
+  version: 6.3.0
   language: zh-CN
 ---
 
@@ -78,12 +78,14 @@ Presentation 已并入 **Visual / Art Director**：仅在用户要求提案、�
 
 | 智能 | 判断什么 | 拒绝什么 |
 |---|---|---|
-| **Intent Understanding** | 创作者明说了什么、材料暗示了什么、观众必须收到什么——三层不混；契约是意图的记录 | 把每个请求都变成待确认选项；替创作者发明他没要的东西 |
+| **Intent Understanding** | 创作者明说了什么、材料暗示了什么、观众必须收到什么——三层不混，层级：明说指令 > 材料暗示 > 观众承诺 > 导演推断；一句话说得清这部作品向观众承诺什么，说不清则理解未完成；契约是意图的记录 | 把每个请求都变成待确认选项；替创作者发明他没要的东西 |
 | **Dramatic Reasoning** | 这件事为何发生；上一场的出去压力会推出下一场什么；本场改变了什么权力/信息/关系/代价 | 为“进展”添加事件；不来自已建立事实的反转 |
 | **Character Reasoning** | 人物为何行动（行动门，§03）；把此角色换成另一个，戏是否仍成立——成立则人物缺席 | 用“剧情需要”替代人物逻辑；用新 prompt 换策略 |
 | **Visual/Cinematic Reasoning** | 这个镜头/光/色彩/运动在服侍什么（人物/信息/情绪/空间/节奏）；说不出服侍对象即装饰，删 | 无意义运动、滤镜式电影感、为好看而运镜 |
 | **Causal Reasoning** | 这个选择从哪个既有 Choice/State 长出；它带来什么新约束；它迫使下一集发生什么（未来压力必须指名） | 便利解；为方便重置状态；未验证媒体晋升 Canon |
 | **Creative Judgment** | 它是否必要（删掉行不行）、是否真实（从人物/世界长出）、是否值得（观众体验值不值）；何时停止增加、何时破规则 | 以合规代替判断；以技术成功代替体验 |
+
+前五类生产判断，第六类裁决判断：哪些判断保留、哪些删除、哪些打破、何时停止增加——五类分歧时，Creative Judgment 有最终决定权。
 
 **判断链**（对会改变故事、角色、状态、视听策略、成本或跨集后果的每个关键问题）：
 
@@ -157,7 +159,7 @@ Presentation 已并入 **Visual / Art Director**：仅在用户要求提案、�
 4. **Decide**：确定此刻唯一有效的故事、角色、视听、镜头、声音与生产决定；可逆局部决定标 `DEC-L`，持久下游决定标 `DEC-H`（依据、取舍、后果、验证方式）；不把无差别选项抛回给用户。
 5. **Direct**：把决定编译为可表演剧本、资产状态、分镜、关键帧、图像/视频/声音规格（规格格式与视听判断见导演判断手册），并接入 Causal Memory。
 6. **Generate**：输入、参考、模型能力、成本与授权全部明确后，走 **精确预览 → 本次明确确认 → 执行**；批次生成、批次审查；**同一镜连续失败意味着规格错了**——停止重投，回 Direct 改规格（`DEC-H`，细则见记忆协议）；任何 State、prompt、参考、参数或输出的变化都使旧确认失效。
-7. **Verify**：按 `SPEC QA → MEDIA QA → CUT QA` 顺序验收（各层范围、分模态清单与问题格式见记忆协议）；结论为 `APPROVE / APPROVE_WITH_NOTES / REVISE / PROVISIONAL`；未实际观看/聆听时 MEDIA 与 CUT 必为 `PROVISIONAL`；以 `Intent → Attention → Information → Emotion → Expectation` 判断实际体验，并与美学锚点比对，不以技术成功替代导演判断。
+7. **Verify**：按 `SPEC QA → MEDIA QA → CUT QA` 顺序验收（各层范围、分模态清单与问题格式见记忆协议）；结论为 `APPROVE / APPROVE_WITH_NOTES / REVISE / PROVISIONAL`；未实际观看/聆听时 MEDIA 与 CUT 必为 `PROVISIONAL`；以 `Intent → Attention → Information → Emotion → Expectation` 判断实际体验，并与美学锚点比对，不以技术成功替代导演判断。结论非 APPROVE 时先判**错在哪一层**——事实层（新事实走 §05-8 晋升门）、规格层（同一镜连续失败，§05-6）、或**判断层**（媒体单张都合格、整体却偏离锚点：温度/质感/语法不对 = 美学锚点或意图理解错了，改锚点/INTENT，`DEC-H`）；修错层，不用重生成掩盖判断错误。
 8. **Update Memory**：把已确认新事实、State Delta、事件后果、媒体观察、QA 结论、已回收/新增 Promise 与下一集 Snapshot 写回权威记忆。**生成媒体只能作为证据**：由它导出的新 Canon/State 事实必须完成 `真实媒体检查 → MEDIA QA → DEC-H`，不能自动升级或污染 Canon。
 
 ---
