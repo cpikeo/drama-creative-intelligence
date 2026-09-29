@@ -1,6 +1,6 @@
-# Director-Level Drama Creative Intelligence · 总导演宪法版 · v6.3
+# Director-Level → Author-Level Drama Creative Intelligence · 总导演宪法版 · v6.4
 
-一个**总导演、一套创作大脑、一套持续记忆、一个世界状态、一张因果图谱、一条完整生产链**。
+一个**总导演、一套创作大脑、一台创意发动机、一套持续记忆、一个世界状态、一张因果图谱、一条完整生产链**。
 它不是多 Agent 岗位拼装、剧本模板、提示词库、网站模板、UI Design System 或组件库。唯一创作中枢是 **Creative Director / Director Core**，统一 Story、World、Character、Visual、Storyboard、Image、Video、Sound、Edit、Continuity、Production、QA 与按需的 Presentation / Editorial Art Direction。
 
 ## 完整能力链
@@ -12,6 +12,7 @@ Understand → Remember → Reason → Decide → Direct → Generate → Verify
 
 - **六类导演智能**：Intent Understanding / Dramatic / Character / Visual-Cinematic / Causal / Creative Judgment 全程工作，各智能固定"判断什么 / 拒绝什么"（SKILL §02）；关键问题以 `Evidence → Context → Trade-off → Decision → Consequence → Verification` 主动取舍；`DEC-L` 承担可逆局部取舍，`DEC-H` 承担会影响跨集真相的持久决定，未来压力必须指名。
 - **例外条款**：任何有意违反（跳切/非线性/主观视角/时间断裂/静态长镜头/规则例外等）合法，但必须写下 意图、因果依据、状态边界；规则与更完整的判断冲突时，判断胜出，推翻记为 DEC。
+- **五类作者级生成能力**（v6.4）：**创意发动机**（主题/矛盾/戏剧前提/独特机制/情绪论点，唯一性测试）、**审美世界观**（审美=世界观，象征系统/视觉语法从主题长出）、**原创性推理**（点名套路、打破 A/B 共享前提、产生有因果依据的 Option C）、**情绪架构**（注意→期待→误读→揭示→积累→释放，情绪由人物代价承担）、**生成性判断**（为何必须这样/能否更独特/删什么更强，判断前移到创造）；**作者自检链**六环为生成侧验收线（SKILL §02 生成侧）。
 - **六种真相**：`CANON / STATE / HISTORY / PROMISE / INTENT / HYPOTHESIS` 一处定死（SKILL §02），变更条件显式；Promise 使用 `Seeded → Activated → Pressured → Narrowed → Redefined → Fulfilled / Abandoned` 生命周期。
 - **Evidence Boundary**：每项证据带 `ID / Type / Source / Confidence / Usable for`；生成媒体只能先作为证据，媒体事实必须经 `真实媒体检查 → MEDIA QA → DEC-H` 才能晋升 Canon/State，永不自动污染。
 - **Causal Memory**：所有有后果的行动遵循 `Choice → Event → State Delta → Consequence → New Constraint → Future Pressure`，让今天的选择持续限制明天的人物、关系、资源与 Promise。
@@ -35,7 +36,7 @@ drama-creative-intelligence/
     └── presentation.md                   # Presentation 手册（仅按需）：判断链、工艺、P- 页面记录与 stale
 ```
 
-**单源真相**：六种真相定义、六类导演智能与例外条款、Character DNA 六层与变化规则、角色分层判据、因果链、图谱节点与边词汇、QA 三层结论、生产门与批次/升级规则均只固定于 SKILL；references 只深化判断（creative-direction）、固定操作（director-memory-continuity）或承载纯按需内容（presentation），不重新定义。
+**单源真相**：六种真相定义、六类导演智能与例外条款、创意发动机五要素与五类作者级生成能力、Character DNA 六层与变化规则、角色分层判据、因果链、图谱节点与边词汇、QA 三层结论、生产门与批次/升级规则均只固定于 SKILL；references 只深化判断（creative-direction）、固定操作（director-memory-continuity）或承载纯按需内容（presentation），不重新定义。
 
 ## v6 减法审计（删除 > 合并 > 简化 > 复用 > 新增）
 
@@ -168,7 +169,20 @@ v6.3 只闭合最后一个缺口：目标要求"从真实媒体反馈持续修�
 
 **v6.3 数字**（UTF-8 字节，git diff 实测）：SKILL 22,323 → 23,017（+3.1%）；CD 16,323 → 16,555；MC 15,226 → 15,389；总量 56,761 → 57,850（+1.9%）。增量全部是判断闭合（三层诊断/锚点可修正/裁决者/意图层级），无新增流程/文件/Agent。
 
-## 自检（四个验收场景）
+## v6.4 作者级升级（Director-Level → Author-Level）
+
+v6.4 补上五个生成侧能力缺口：v6.2/v6.3 解决"会判断、会执行、可修正"，v6.4 解决"会创造"——判断前移到"应该创造什么"。六智能表、六项链、例外条款、六种真相、QA 三层全部保留未动；references 按分工深化，未建立第二套真相。
+
+- **创意发动机**（SKILL §02 生成侧 + §04 契约）：`Theme + Contradiction + Dramatic Premise + Unique Mechanism + Emotional Thesis`，各要素由其余要素推出（题材惯例拼装不成立）；**唯一性测试**（换进同题材仍成立=不独特；拿掉后能被别的作品说出=发动机不成立）。原"故事发动机"4 动力学检验并入为发动机检验（判断手册 §1），名称统一为创意发动机——消除双名并行。
+- **审美世界观**（SKILL 生成侧 + CD §3）：审美=作品世界观；**象征系统**：符号=压缩的因果断言，意义全作品唯一，新因果断言才新增符号，改义=DEC-H；审美世界观修正维度含象征系统与视觉语法（MC §1 Visual Bible 行收编象征系统）。
+- **原创性推理**（SKILL 生成侧 + CD §1）：猜测依据二分（来自人物=保留 / 来自题材=打破）；A/B 场景先写**共享前提**（通常只有一个），Option C = 打破共享前提且仍服务主题，必须答出它从发动机长出。
+- **情绪架构**（SKILL 生成侧 + CD §1）：观众体验链 `注意 → 期待 → 误读 → 揭示 → 积累 → 释放`；每情绪节拍记 `人物选择 → 观众此前信什么 → 现在信什么 → 欠/还了什么情绪`；场次局部形式=观众任务（CD §3）。
+- **生成性判断**（SKILL 生成侧）：判收三问（必要/真实/值得）与三创问（为何必须/能否更独特/删什么更强）= 同一判断的两个时点（创作后/创作前）。
+- **作者自检链**（SKILL 生成侧）：`人物为何如此选择 → 事件为何发生 → 选择产生什么代价 → 下一步形成什么压力 → 为什么必须这样视觉化/声音化 → 观众应经历什么变化`；任何一环答不出 = 拼装级。
+
+**v6.4 数字**（UTF-8 字节，git diff 实测）：SKILL 23,017 → 25,829（+12.2% = 生成侧小节整体）；CD 16,555 → 17,727（+7.1% = 原创性/情绪架构操作化 + 象征系统）；MC 15,389 → 15,489（+0.6% = 两行记忆域收编）；总量 57,850 → 61,934（+7.1%）。减法：合并 2 处（"故事发动机"双名并行 → 统一"创意发动机"；判收三问/三创问钉为同一判断两时点）；未新增文件/Agent/流程。
+
+## 自检（五个验收场景）
 
 技能跑起来后，用以下场景验证"承诺是否落地"。任一检查项不过 = 技能执行缺陷，不是故事缺陷。
 
@@ -195,6 +209,13 @@ v6.3 只闭合最后一个缺口：目标要求"从真实媒体反馈持续修�
 - [ ] 例外被写下（DEC 或规格内声明），不是静默执行
 - [ ] 例外后的下游参照锚明确（回归到哪一镜/哪一状态）
 - [ ] 三问答不出 → 按缺陷处理，回 Direct 重判，不投产
+
+**场景 E：作者级生成**（输入：一句话 premise 或题材）
+- [ ] 发动机五要素齐全，每个要素能答"为何由其余要素推出"；唯一性测试通过（换进同题材不再成立）
+- [ ] 给定任一 A/B 分叉：能点名共享前提，并产出 Option C（附发动机依据，不是聪明）
+- [ ] 情绪架构图：每个情绪节拍有人物选择与观众信念变化，无滤镜式情绪节拍
+- [ ] 作者自检链六环全部可答；任一环答不出 = 拼装级，回生成侧
+- [ ] 审美世界观能从主题答出"为什么必须长这样"，而非从口味
 
 ## 使用方式
 
