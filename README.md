@@ -1,4 +1,4 @@
-# Director-Level Drama Creative Intelligence · 总导演宪法版 · v6.1
+# Director-Level Drama Creative Intelligence · 总导演宪法版 · v6.2
 
 一个**总导演、一套创作大脑、一套持续记忆、一个世界状态、一张因果图谱、一条完整生产链**。
 它不是多 Agent 岗位拼装、剧本模板、提示词库、网站模板、UI Design System 或组件库。唯一创作中枢是 **Creative Director / Director Core**，统一 Story、World、Character、Visual、Storyboard、Image、Video、Sound、Edit、Continuity、Production、QA 与按需的 Presentation / Editorial Art Direction。
@@ -10,7 +10,8 @@ Understand → Remember → Reason → Decide → Direct → Generate → Verify
 理解 → 回忆 → 推理 → 决策 → 执导 → 生产 → 验收 → 记忆更新
 ```
 
-- **Director Intelligence**：关键问题以 `Evidence → Context → Alternatives → Trade-off → Decision → Consequence → Verification` 主动取舍；`DEC-L` 承担可逆局部取舍，`DEC-H` 承担会影响跨集真相的持久决定。
+- **六类导演智能**：Intent Understanding / Dramatic / Character / Visual-Cinematic / Causal / Creative Judgment 全程工作，各智能固定"判断什么 / 拒绝什么"（SKILL §02）；关键问题以 `Evidence → Context → Trade-off → Decision → Consequence → Verification` 主动取舍；`DEC-L` 承担可逆局部取舍，`DEC-H` 承担会影响跨集真相的持久决定，未来压力必须指名。
+- **例外条款**：任何有意违反（跳切/非线性/主观视角/时间断裂/静态长镜头/规则例外等）合法，但必须写下 意图、因果依据、状态边界；规则与更完整的判断冲突时，判断胜出，推翻记为 DEC。
 - **六种真相**：`CANON / STATE / HISTORY / PROMISE / INTENT / HYPOTHESIS` 一处定死（SKILL §02），变更条件显式；Promise 使用 `Seeded → Activated → Pressured → Narrowed → Redefined → Fulfilled / Abandoned` 生命周期。
 - **Evidence Boundary**：每项证据带 `ID / Type / Source / Confidence / Usable for`；生成媒体只能先作为证据，媒体事实必须经 `真实媒体检查 → MEDIA QA → DEC-H` 才能晋升 Canon/State，永不自动污染。
 - **Causal Memory**：所有有后果的行动遵循 `Choice → Event → State Delta → Consequence → New Constraint → Future Pressure`，让今天的选择持续限制明天的人物、关系、资源与 Promise。
@@ -34,7 +35,7 @@ drama-creative-intelligence/
     └── presentation.md                   # Presentation 手册（仅按需）：判断链、工艺、P- 页面记录与 stale
 ```
 
-**单源真相**：六种真相定义、Character DNA 六层与变化规则、角色分层判据、因果链、图谱节点与边词汇、QA 三层结论、生产门与批次/升级规则均只固定于 SKILL；references 只深化判断（creative-direction）、固定操作（director-memory-continuity）或承载纯按需内容（presentation），不重新定义。
+**单源真相**：六种真相定义、六类导演智能与例外条款、Character DNA 六层与变化规则、角色分层判据、因果链、图谱节点与边词汇、QA 三层结论、生产门与批次/升级规则均只固定于 SKILL；references 只深化判断（creative-direction）、固定操作（director-memory-continuity）或承载纯按需内容（presentation），不重新定义。
 
 ## v6 减法审计（删除 > 合并 > 简化 > 复用 > 新增）
 
@@ -134,7 +135,29 @@ v6 解决"定义层单源"，v6.1 解决"承诺 → 执行"断层：把已有承
 
 **v6.1 数字**（UTF-8 字节）：SKILL 18,439→19,693（+6.8%，= 任务加载矩阵 + 5 条条款级规则）；CD 13,688→15,264（+11.5%，全为 P0-2/P1 机制）；MC 11,052→15,027（+36.0%，全为操作协议）；presentation 新增 2,889（从 CD/MC 移出 3,200，净变化 ≈ −300，且常规任务不再加载）。**单任务 Context 反而下降**：加载矩阵把"整份 reference"收紧为"任务→章节"，生产任务最坏情况 35.0KB（v6 为 43.2KB，−19%），严格按章节读则 23–28KB（−35~−47%）。
 
-## 自检（三个验收场景）
+## v6.2 判断化升级（Skill Execution → Director-Level Creative Judgment）
+
+v6.2 的目标不是加流程：把 v6.1 里**散落的"智力"组织出来**，让"Directorial Judgment > Rules"成为可执行的例外条款，并把 v6.1 的工作流压缩为判断版。
+
+**宪法层（SKILL）**
+- **六类导演智能表**成为宪法核心：Intent Understanding / Dramatic / Character / Visual-Cinematic / Causal / Creative Judgment，各智能固定"判断什么 / 拒绝什么"，替代旧 Director Intelligence 小节；开篇声明"本文件是判断的宪法，不是流程的清单"。
+- **例外条款宪法化**：任何有意违反（跳切/非线性/主观视角/时间断裂/静态长镜头/规则例外等）合法，但必写三件事——**意图、因果依据、状态边界**；"未写下的例外是缺陷，写下的例外是选择"；与规则冲突时判断胜出，推翻记 DEC。
+- **判断链收为六项** `Evidence → Context → Trade-off → Decision → Consequence → Verification`：取消独立 Alternatives 环节（消除"列选项"倾向），比较动作折入 Trade-off，全文件同步。
+- **未来压力必须指名**：DEC-H/因果条目的 Future Pressure 写成"谁、因何、被迫做/不能做什么"；"长期影响"式空话无效。
+- Loop 声明"八步 = 同一判断的八次切换，不是八道工序"；Understand/Reason 步接入意图三层与角色替换测试。
+
+**判断深化层（creative-direction）**
+- **下一场预测测试**（dramatic）：下一场必须由上一场出去压力推出；推不出则补出去压力或查借因，不过场糊弄。
+- **角色替换测试**（character）：换一个人物戏仍成立 = 人物缺席；表演是 Arc State 的可见形式。
+- **静止帧测试 + 元素服务测试**（cinematic）：任何一帧停住必须成立；光/色/材质/运动/景深/SFX 逐一问服侍什么，说不出即装饰删；克制 = 边际递减点。
+
+**压缩（v6.1 工作流 → 判断版，智能价值不损）**：批次/升级 3 bullets → 1 段判断原理（系统性缺陷=共同原因；连续失败=规格错了）；分模态清单 → **各模态典型失效模式**（知识而非 checklist）；散落"声明例外"措辞 → 统一指向例外条款。
+
+**不动**：demo 项目 `drama-tangyuan/` 一行未改——v6.2 只加判断层不改格式，项目按原样继续（复用，不重复生成）。
+
+**v6.2 数字**（UTF-8 字节，git diff 实测）：SKILL 19,693 → 22,323（+13.4%，增量全部 = 常驻判断核心：六智能表 + 例外条款 + 未来压力规则；同时删去 Presentation 链重复与多处复述）；CD 15,264 → 16,323（+6.9%，全部为三个判断测试）；MC 15,027 → 15,226（≈净零：批次压缩 ≈ 未来压力条款 + 失效模式改写）；总量 52,873 → 56,761（+7.4%）。宪法层增量全部是"始终在场的判断力"，按需层增量全部是可验证的判断工具；未新增任何流程。
+
+## 自检（四个验收场景）
 
 技能跑起来后，用以下场景验证"承诺是否落地"。任一检查项不过 = 技能执行缺陷，不是故事缺陷。
 
@@ -155,6 +178,12 @@ v6 解决"定义层单源"，v6.1 解决"承诺 → 执行"断层：把已有承
 - [ ] 变更记 `DEC-H`，含依据/牺牲/下游影响/验证方式
 - [ ] stale 范围正确（按 MC §5 变化源表）；未点名下游被标 stale 而非静默
 - [ ] 剧本定稿后图谱增量同步更新；受影响媒体标 stale 且未自动重投
+
+**场景 D：有意例外的合法性**（输入：任一 跳切/非线性/主观视角/时间断裂/静态长镜头 的提议）
+- [ ] 三问可答：为何破（意图）、从什么长出（因果依据）、何时生效/回归（状态边界）
+- [ ] 例外被写下（DEC 或规格内声明），不是静默执行
+- [ ] 例外后的下游参照锚明确（回归到哪一镜/哪一状态）
+- [ ] 三问答不出 → 按缺陷处理，回 Direct 重判，不投产
 
 ## 使用方式
 

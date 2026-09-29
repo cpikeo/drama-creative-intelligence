@@ -42,7 +42,7 @@
 
 **Evidence 记录**：`ID / Type / Source / Confidence / Usable for`。Type 仅为 `USER / CANON / HISTORY / MEDIA / QA / HYPOTHESIS`；Source 定位到创作者指令、文件、镜头或时间码；Confidence 为 `Confirmed / Observed / Inferred / Unverified`；并写明它能支持什么、不能支持什么。
 
-**决定记录**：`DEC-L`/`DEC-H` 的判定标准固定于 SKILL §02。每条 `DEC-H` 按 `Evidence → Context → Alternatives → Trade-off → Decision → Consequence → Verification` 链填写：`Alternatives` 只列真实可行且后果不同的方向；`Verification` 指向具体场、镜、媒体或后续 Snapshot。
+**决定记录**：`DEC-L`/`DEC-H` 的判定标准固定于 SKILL §02。每条 `DEC-H` 按 `Evidence → Context → Trade-off → Decision → Consequence → Verification` 链填写：`Trade-off` 只列真实可行且后果不同的方向；`Verification` 指向具体场、镜、媒体或后续 Snapshot；未来压力按 Causal Memory 标准填写（具体的下一集压力，非“长期影响”）。
 
 **因果条目**：存入 Events/History，逐词填写因果链（SKILL §02）；每条必须能反查到其 State Delta 与下游 Pressure，并回答“它新增了什么约束”。
 
@@ -132,11 +132,7 @@ EP### State Snapshot
 
 **生产门执行细则**：每次外部生产按 **精确任务（模态、数量、规格、参考、参数、输出、成本/授权）→ 展示预览 → 创作者本次明确确认 → 执行 → 检查真实媒体 → 更新 Memory** 展开（门的宪法表述与确认失效规则见 SKILL §05-6）。中断任务先收集/检查已提交结果，不盲目重投。
 
-**批次与升级**：
-
-- 批次 3–5 镜（按场景）；每批过 MEDIA QA 后再投下一批。
-- 批内系统性缺陷（同角色脸/服装/光态在多镜同错）→ 先修共同原因（IDENTITY 块/定妆参考图/参数/状态表），重验 1 镜通过后再继续；禁止逐镜硬磕。
-- 同一镜 MEDIA QA 连续失败 2–3 次 → 停止重投：回 Direct 改规格（记 `DEC-H`）或改镜头职责；规格未变不重投同一规格。
+**批次与升级（判断版）**：按场景批次生成、批次审查（3–5 镜/批），每批过 MEDIA QA 再投下一批。批内出现系统性缺陷（同一脸/服装/光态多镜同错）= **共同原因缺陷**：先修共同原因（IDENTITY 块/定妆参考图/参数/状态表），重验 1 镜通过再继续，不逐镜硬磕。同一镜 MEDIA QA 连续失败 2–3 次 = **规格错了**：停止重投，回 Direct 改规格（记 `DEC-H`）或改镜头职责；规格未变的重投是浪费调用。
 
 **生产追踪**（`剧集/EP###.md` 内，跨会话断点）：
 
@@ -156,7 +152,7 @@ EP### State Snapshot
 
 **美学锚点**：契约期创作者认可的 3–6 张 REF 剧照，记入 Visual Bible 并声明锚定维度（见判断手册 §3）；MEDIA QA 第一项 = 与锚点比对（调色/质感/光方向是否接近锚点？）。无锚点时，SPEC QA 声明“无锚点”并在首集验收时补齐，不得按通过处理。
 
-**分模态清单**（MEDIA QA 逐项勾选，记录项与结论）：
+**各模态典型失效模式**（MEDIA QA 问“这个模态具体会怎么失效”，逐项核对并记录项与结论）：
 
 - **图像**：IDENTITY 块/定妆参考图一致 · 高画质基线 7 项 · State 一致（变体/伤痕/持物）· 画内文字 · 美学锚点
 - **视频**：首帧 = 已验收关键帧 · 主事件唯一 · 运动无跳变/穿模 · 口型（含对白时）· 物件持久 · 光影连续 · 时长闭合
