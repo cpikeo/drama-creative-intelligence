@@ -1,4 +1,4 @@
-# Director-Level → Author-Level Drama Creative Intelligence · v7.0.0
+# Director-Level → Author-Level Drama Creative Intelligence · v7.1.0
 
 一个导演级与作者级的剧集创作智能。以唯一的创作总监为中枢，维护跨集记忆、世界状态、角色 DNA（含声音）与因果图谱，用同一套判断完成故事、人物、镜头、声音、生产与验收，让每一集都建立在前集的真实后果之上。
 
@@ -38,13 +38,8 @@
 
 ## 能力声明（每个项目填写一次）
 
-```text
-设计：判断与规格，始终可用
-执行：图像 有/无 · 视频 有/无 · TTS 有/无（音色 ID） · 音乐 有/无 · 剪辑 有/无
-验证：能否看图 · 能否抽帧看视频 · 能否听音频
-```
-
-听不了的模态，其声音相关的验收项保持 `PROVISIONAL`；规格不是媒体，模拟检查不是观看。
+模板与规则见 [SKILL.md §5](SKILL.md)：设计 / 执行 / 验证分开记录；执行为"无"的模态停在 GEN；
+听不了的模态，其相关验收项保持 `PROVISIONAL`。
 
 ## 仓库结构
 
@@ -53,13 +48,25 @@ SKILL.md                                    宪法：判断、记忆、角色、
 references/creative-direction.md            导演判断手册：故事与因果、角色 DNA、电影语言、规格编译、剪辑
 references/director-memory-continuity.md    记忆与生产协议：文件结构、Snapshot、图谱、变化传播、批次与验收
 references/presentation.md                  派生展示（按需）：提案、Lookbook、deck
-CHANGELOG.md                                v7.0.0 的变更、度量、测试记录、未执行项与剩余风险
+verification/                               随仓交付的可复现验证：lint、变异样例、度量脚本、盲评量表
+CHANGELOG.md                                变更、度量、测试记录、未执行项与剩余风险
 LICENSE                                     Apache-2.0
 ```
 
 ## 版本与验证
 
-v7.0.0 的删减、修复与测试结果见 [CHANGELOG.md](CHANGELOG.md)。测试覆盖原创故事、三集角色与声音一致性、关键事实变更的传播、真实图像与粗剪成片四类任务；未执行的项（如 AI 视频生成、听感验证）已逐项标注。
+版本与完整变更记录见 [CHANGELOG.md](CHANGELOG.md)。
+
+随仓库交付的可复现验证见 [verification/](verification/README.md)：确定性 lint
+（仓库完整性 + 协议安全网）、5 个变异样本、度量脚本与盲评量表，一键运行：
+
+```bash
+bash verification/run_all.sh
+```
+
+v7.0.0 声称的真实媒体测试（图像、配音、粗剪）制品未随仓库交付，其媒体与听感结论
+在本仓库内不可复现，不作为已验证能力；v7.1.0 起，确定性验证随仓库交付，
+艺术质量评价统一走盲评量表，未执行的项在 CHANGELOG 逐项标注。
 
 ## License
 

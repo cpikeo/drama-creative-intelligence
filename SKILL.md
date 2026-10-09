@@ -3,7 +3,7 @@ name: drama-creative-intelligence
 description: 导演级与作者级的剧集创作智能。用于从一句话、授权原著、剧本、分镜或成片出发，创作、续写、修改或生产 AI 漫剧、短剧、剧集、广告与电影；维护跨集记忆、世界状态、角色 DNA（含声音）与因果图谱，并对真实媒体做分层验收。
 license: Apache-2.0
 metadata:
-  version: 7.0.0
+  version: 7.1.0
   language: zh-CN
 ---
 
@@ -26,7 +26,7 @@ metadata:
 | 步 | 此刻的唯一产出 |
 |---|---|
 | 理解 | 作品承诺（一句话：观众会因何事、看见谁的什么选择而改变判断）、媒介与交付形态、范围、红线。意图分层：明说指令 > 材料暗示 > 观众承诺 > 导演推断 |
-| 回忆 | 按切片加载读取（协议 §5）；足以判断因果、动机与制作边界即停，不全量塞入记忆 |
+| 回忆 | 按切片加载读取（协议 §5）；证据足以判断即停，不全量塞入记忆 |
 | 推理 | 证据 → 语境 → 取舍（只比较可行且后果不同的方向）→ 决定 → 后果 → 验证。内部完成，不逐条输出 |
 | 决策 | 实质性决定写 DEC（§1）；其余直接判断 |
 | 执导 | 可表演的剧本、镜头卡、资产状态与规格块，每一项接入因果与状态边界 |
@@ -64,7 +64,7 @@ metadata:
 | **INTENT 意图** | 观看承诺、情绪温度、信息权限、视听策略、节奏、禁区与允许的例外 | 可变，但不得伪装成故事事实 |
 | **HYPOTHESIS 假设** | 为继续创作而做的临时推断 | 带依据、置信与验证点；未验证不进入 CANON |
 
-每条记忆写明来源（创作者指令、已确认文件、真实媒体、QA 结论或推断）与置信（Confirmed / Observed / Inferred / Unverified）。既有事实冲突时，先找来源与状态转变，不以新 prompt 覆盖旧 Canon。
+每条记忆写明来源（创作者指令、已确认文件、真实媒体、QA 结论或推断）与置信（Confirmed / Observed / Inferred / Unverified）。既有事实冲突时，先找来源与状态转变，不以新 prompt 覆盖旧 Canon。HYPOTHESIS 须在 Snapshot 未决中登记；验证点兑现后晋升或证伪，过期未验证的假设不得被后续剧本引用。
 
 ## 3｜人物、世界与因果
 
@@ -74,11 +74,11 @@ metadata:
 - **C 级**：单场角色。不建持久 ID；跨集或获得 PROMISE 时升为 B 级。
 
 **A 级六层 DNA**（每层的判断问题见 creative-direction §2）：
-- **Identity**：不可替换的身份锚点（年龄、背景、命名、标志特征）。
-- **Psychology**：欲望、恐惧、盲点、旧策略、底线、信念。盲点须能在某场制造反讽或代价。
-- **Visual DNA**：可辨脸与体态、发型、服装系统、伤痕、标志道具、能力标志与状态变体。每个变体指向触发事件与还原条件。
-- **Voice DNA**：音色、语速与节奏、口吻、呼吸、情绪化声表现、口头禅与称呼；配音锁（平台音色 ID、参数、口音）为 LOCK。
-- **Relationship**：立场、知识、债务、双方筹码，以及上一事件后的变化。
+- **Identity**：不可替换的身份锚点。
+- **Psychology**：驱动选择的内核；盲点须能在某场制造反讽或代价。
+- **Visual DNA**：可辨识的脸、体态与服装系统；每个状态变体指向触发事件与还原条件。
+- **Voice DNA**：声音指纹与口头禅；配音锁（平台音色 ID、参数、口音）为 LOCK。
+- **Relationship**：立场、债与筹码，及上一事件后的变化。
 - **Arc State**：旧策略 / 受压 / 退缩固化 / 选择 / 付价 / 重组 / 新策略中的阶段，及其因果依据。
 
 **行动门**：关键行动依次经过 `Want → Know → Leverage → Pressure → Choice → Cost → visible Action`。任一环为空，先补人物前因、信息或压力，不得以“剧情需要”代替。策略升级须走完 Arc State 过渡，不能由新 prompt 直接换掉。
@@ -91,7 +91,7 @@ metadata:
 
 **LOCK（连续性锁）**：跨集必须保持的身份参数，包括造型参考、配音锁、环境声基线、动机旋律、色板、负面锁与空间结构。LOCK 只能经变化规则修改，并记 DEC。
 
-**Continuity Graph**：节点 `CHAR · LOC · PROP · EVENT · REL · PROM · ASSET · SC · SH · MEDIA`；边 `causes · changes · limits · enables · knows · believes · holds · owes · promises · fulfills · contradicts`。每条边带来源、前后状态、生效范围与观众是否已知。两个程序不可省：**剧本定稿时同步写图谱增量**；**写场前反查**目标角色的 knows、holds、owes、promises，相关 PROMISE，以及 LOC 与 PROP 的当前状态，结论写入镜头卡的“连续性依据”。格式见协议 §4。**依据以 ID 为准**：CANON 与关键 STATE 挂到节点（EVENT、REL、PROP）；对白、场次与镜头的依据写 ID。无 ID 的事实不可被传播。
+**Continuity Graph**：节点 `CHAR · LOC · PROP · EVENT · REL · PROM · ASSET · SC · SH · MEDIA`；边 `causes · changes · limits · enables · knows · believes · holds · owes · promises · fulfills · contradicts`。每条边带来源、前后状态、生效范围与观众是否已知。两个程序不可省：**剧本定稿时同步写图谱增量**；**写场前反查**（查什么、怎么查见协议 §4），结论写入镜头卡的“连续性依据”。格式见协议 §4。**依据以 ID 为准**：CANON 与关键 STATE 挂到节点（EVENT、REL、PROP）；对白、场次与镜头的依据写 ID。无 ID 的事实不可被传播。
 
 ## 4｜作者级生成：先决定该有什么
 
@@ -122,7 +122,7 @@ metadata:
 
 **不因缺口中断创作**：除非缺口实质改变主角、结局、授权或安全边界、外部成本，否则按最合理的导演判断推进，并把假设记为 HYPOTHESIS。
 
-**媒介与交付形态**在契约期定档，决定镜头语法、运动预算、声音设计与交付规格，不做后期“视频化”或“电影化”补救。媒介：静态漫剧、动态漫、图生视频、文生视频、拟真实拍。交付：短剧、剧集、广告、电影。
+**媒介与交付形态**在契约期定档，决定镜头语法、运动预算、声音设计与交付规格，不做后期“视频化”或“电影化”补救。媒介：静态漫剧、动态漫、图生视频、文生视频、拟真实拍。交付：短剧、剧集、广告、电影。**广告边界**：品牌事实、产品参数与法务红线为 CANON；广告的情绪架构仍须从本作发动机长出，客户稿不替代创作判断。
 
 **能力声明**（每个项目一次，能力变化时更新）：
 - **设计**：本 Skill 的判断与规格，始终可用。
@@ -164,7 +164,7 @@ metadata:
 | 媒体 | 规格正确，但随机漂移；或画内文字、局部特征（伤痕、袖口）错误 | 先编辑（去字、补特征、修连接），只复验改动区域；仅当身份、核心动作、必要信息或交付受损时才重生；画内文字改由剪辑叠字 |
 | 剪辑 | 节奏、接缝、字幕、响度 | 剪辑处理，不重投 |
 
-**变化传播**：`Change → Dependency Graph → Stale Scope → Recheck`。范围是依赖 ID 的闭包（引用了变化 ID 的行），不按类别整批标记；枢纽节点（如 PROM）不沿其扩展，除非其状态或回收条件变化。`stale` 表示必须重新判断，不等于重新生成。优先顺序为 `Re-read → Re-plan → Reuse → Edit → Regenerate`。影响范围表见协议 §5。
+**变化传播**：`Change → Dependency Graph → Stale Scope → Recheck`。范围闭包与枢纽规则见协议 §5；`stale` 表示必须重新判断，不等于重新生成。优先顺序为 `Re-read → Re-plan → Reuse → Edit → Regenerate`。
 
 ## 6｜按需加载
 
@@ -175,6 +175,7 @@ metadata:
 | 记忆、Snapshot、图谱、变化传播 | [记忆与生产协议](references/director-memory-continuity.md) §1–5 |
 | 生产、批次、追踪、媒体验收 | 记忆与生产协议 §6；导演判断手册 §3（高画质基线）与 §4 |
 | 提案、Lookbook、deck、发行视觉 | [Presentation 手册](references/presentation.md)（仅按需） |
+| 仓库自检与度量（维护者） | [verification/](verification/README.md)：lint、变异样例与度量脚本，本地运行，不进创作 Context |
 
 ## 7｜交付
 
