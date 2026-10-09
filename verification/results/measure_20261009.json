@@ -1,0 +1,112 @@
+{
+  "root": "/home/user/drama-creative-intelligence",
+  "token_estimation": "o200k_base",
+  "files": {
+    "SKILL.md": {
+      "bytes": 20200,
+      "lines": 190,
+      "chars": 9037,
+      "tokens": 5650,
+      "rule_words": {
+        "必须": 11,
+        "禁止": 1,
+        "不得": 6,
+        "不可": 3,
+        "须": 18,
+        "必": 2,
+        "合计": 41
+      }
+    },
+    "references/creative-direction.md": {
+      "bytes": 13393,
+      "lines": 101,
+      "chars": 5131,
+      "tokens": 3874,
+      "rule_words": {
+        "必须": 4,
+        "禁止": 4,
+        "不得": 2,
+        "不可": 2,
+        "须": 10,
+        "必": 5,
+        "合计": 27
+      }
+    },
+    "references/director-memory-continuity.md": {
+      "bytes": 10493,
+      "lines": 116,
+      "chars": 4816,
+      "tokens": 3021,
+      "rule_words": {
+        "必须": 1,
+        "禁止": 0,
+        "不得": 1,
+        "不可": 3,
+        "须": 7,
+        "必": 2,
+        "合计": 14
+      }
+    },
+    "references/presentation.md": {
+      "bytes": 2456,
+      "lines": 24,
+      "chars": 986,
+      "tokens": 647,
+      "rule_words": {
+        "必须": 1,
+        "禁止": 0,
+        "不得": 1,
+        "不可": 0,
+        "须": 0,
+        "必": 0,
+        "合计": 2
+      }
+    },
+    "README.md": {
+      "bytes": 4146,
+      "lines": 74,
+      "chars": 2118,
+      "tokens": 1113,
+      "rule_words": {
+        "必须": 0,
+        "禁止": 0,
+        "不得": 0,
+        "不可": 1,
+        "须": 0,
+        "必": 0,
+        "合计": 1
+      }
+    },
+    "CHANGELOG.md": {
+      "bytes": 20211,
+      "lines": 219,
+      "chars": 10075,
+      "tokens": 6535,
+      "rule_words": {
+        "必须": 2,
+        "禁止": 1,
+        "不得": 3,
+        "不可": 11,
+        "须": 7,
+        "必": 1,
+        "合计": 25
+      }
+    }
+  },
+  "totals": {
+    "skill_files_bytes": 46542,
+    "skill_files_tokens": 13192,
+    "resident_SKILL_tokens": 5650,
+    "on_demand_references_tokens": 7542,
+    "rule_words_SKILL": 41,
+    "rule_words_all_skill": 84,
+    "typical_story_task_tokens": 9524,
+    "typical_production_task_tokens": 8671
+  },
+  "duplication": {
+    "cross_file_rule_sentences": {},
+    "shared_8gram_total": 128,
+    "shared_8gram_rule_like": []
+  },
+  "broken_links": []
+}
