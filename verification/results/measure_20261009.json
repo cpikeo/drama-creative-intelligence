@@ -3,33 +3,33 @@
   "token_estimation": "o200k_base",
   "files": {
     "SKILL.md": {
-      "bytes": 20200,
+      "bytes": 20337,
       "lines": 190,
-      "chars": 9037,
-      "tokens": 5650,
+      "chars": 9094,
+      "tokens": 5692,
       "rule_words": {
         "必须": 11,
         "禁止": 1,
         "不得": 6,
         "不可": 3,
-        "须": 18,
+        "须": 19,
         "必": 2,
-        "合计": 41
+        "合计": 42
       }
     },
     "references/creative-direction.md": {
-      "bytes": 13393,
-      "lines": 101,
-      "chars": 5131,
-      "tokens": 3874,
+      "bytes": 14869,
+      "lines": 104,
+      "chars": 5645,
+      "tokens": 4310,
       "rule_words": {
         "必须": 4,
         "禁止": 4,
         "不得": 2,
         "不可": 2,
-        "须": 10,
+        "须": 18,
         "必": 5,
-        "合计": 27
+        "合计": 35
       }
     },
     "references/director-memory-continuity.md": {
@@ -63,10 +63,10 @@
       }
     },
     "README.md": {
-      "bytes": 4146,
-      "lines": 74,
-      "chars": 2118,
-      "tokens": 1113,
+      "bytes": 4356,
+      "lines": 75,
+      "chars": 2196,
+      "tokens": 1172,
       "rule_words": {
         "必须": 0,
         "禁止": 0,
@@ -78,34 +78,34 @@
       }
     },
     "CHANGELOG.md": {
-      "bytes": 20211,
-      "lines": 219,
-      "chars": 10075,
-      "tokens": 6535,
+      "bytes": 26972,
+      "lines": 290,
+      "chars": 13377,
+      "tokens": 8755,
       "rule_words": {
-        "必须": 2,
+        "必须": 3,
         "禁止": 1,
         "不得": 3,
         "不可": 11,
-        "须": 7,
+        "须": 13,
         "必": 1,
-        "合计": 25
+        "合计": 32
       }
     }
   },
   "totals": {
-    "skill_files_bytes": 46542,
-    "skill_files_tokens": 13192,
-    "resident_SKILL_tokens": 5650,
-    "on_demand_references_tokens": 7542,
-    "rule_words_SKILL": 41,
-    "rule_words_all_skill": 84,
-    "typical_story_task_tokens": 9524,
-    "typical_production_task_tokens": 8671
+    "skill_files_bytes": 48155,
+    "skill_files_tokens": 13670,
+    "resident_SKILL_tokens": 5692,
+    "on_demand_references_tokens": 7978,
+    "rule_words_SKILL": 42,
+    "rule_words_all_skill": 93,
+    "typical_story_task_tokens": 10002,
+    "typical_production_task_tokens": 8713
   },
   "duplication": {
     "cross_file_rule_sentences": {},
-    "shared_8gram_total": 128,
+    "shared_8gram_total": 139,
     "shared_8gram_rule_like": []
   },
   "broken_links": []
