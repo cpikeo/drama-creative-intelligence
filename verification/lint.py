@@ -51,7 +51,9 @@ def read(p: Path) -> str:
 
 
 def all_md(root: Path):
-    return sorted(root.rglob("*.md"))
+    # 跳过 .git、__pycache__ 与 A/B 生成快照（生成物，不入库）
+    return sorted(p for p in root.rglob("*.md")
+                  if not ({".git", "__pycache__", "snapshots"} & set(p.parts)))
 
 
 # ---------------- 仓库完整性（R1-R4） ----------------

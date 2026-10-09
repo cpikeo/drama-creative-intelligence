@@ -1,4 +1,4 @@
-# Director-Level → Author-Level Drama Creative Intelligence · v7.2.0
+# Director-Level → Author-Level Drama Creative Intelligence · v7.2.1
 
 一个导演级与作者级的剧集创作智能。以唯一的创作总监为中枢，维护跨集记忆、世界状态、角色 DNA（含声音）与因果图谱，用同一套判断完成故事、人物、镜头、声音、生产与验收，让每一集都建立在前集的真实后果之上。
 

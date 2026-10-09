@@ -16,15 +16,15 @@ echo "- 性质: 全部确定性检查，零模型调用，零媒体费用"
 echo ""
 
 FAIL=0
-echo "== 1/4 仓库完整性（R1-R4，应全部通过）=="
+echo "== 1/5 仓库完整性（R1-R4，应全部通过）=="
 python3 lint.py --repo "$ROOT" || FAIL=1
 
 echo ""
-echo "== 2/4 样例项目安全网（P1-P12，应全部通过）=="
+echo "== 2/5 样例项目安全网（P1-P12，应全部通过）=="
 python3 lint.py --project fixtures/project || FAIL=1
 
 echo ""
-echo "== 3/4 变异测试（5 个已知缺陷，应全部检出）=="
+echo "== 3/5 变异测试（5 个已知缺陷，应全部检出）=="
 for d in fixtures/mutations/M*/; do
   name="$(basename "$d")"
   expect="$(cat "$d/EXPECT")"
@@ -39,9 +39,13 @@ for d in fixtures/mutations/M*/; do
 done
 
 echo ""
-echo "== 4/4 度量 =="
+echo "== 4/5 度量 =="
 python3 measure.py "$ROOT" > "results/measure_$(date +%Y%m%d).json"
 python3 measure.py "$ROOT" --md | sed -n '/## 度量摘要/,$p'
+
+echo ""
+echo "== 5/5 媒体测量层自检（需要 ffmpeg；缺失时标注未执行，不伪造结果）=="
+python3 media_qa.py --selftest || FAIL=1
 
 echo ""
 if [ "$FAIL" -eq 0 ]; then

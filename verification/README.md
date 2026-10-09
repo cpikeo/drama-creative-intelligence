@@ -10,7 +10,7 @@ v7.0.0 的测试制品保留在作者工作区、未随仓库发布（见 CHANGE
 bash verification/run_all.sh
 ```
 
-四步，全部确定性、零模型调用、零媒体费用：
+四步确定性验证 + 一步条件化媒体自检，全部零模型调用、零媒体费用：
 
 1. **仓库完整性（R1–R4）**：frontmatter 与版本一致、Markdown 链接可解析、
    § 章节引用可解析、关键概念保留（`concepts.txt`，防止重构丢能力）。
@@ -20,6 +20,19 @@ bash verification/run_all.sh
    （承诺跳阶、变更段内箭头、缺固定章节、悬空依据 ID、未观看却通过），
    每个都必须被对应规则检出。
 4. **度量**：`measure.py` 输出字节 / o200k_base token / 规则措辞 / 重复规则句 / 失效链接。
+5. **媒体测量层自检**：`media_qa.py --selftest` 用 ffmpeg 生成真实测试媒体
+   （参考件 + 响度违规 + 分辨率违规），验证积分响度（LUFS）/ 真峰值（dBTP）/ 规格
+   的测量与判定；感官项恒为 NEEDS_HUMAN。无 ffmpeg 时标注未执行（可
+   `pip install imageio-ffmpeg` 获得静态二进制）。
+
+另有两套面向"人"的台子（本身不替代人工评审）：
+
+- **`ab_review/`**：v7.1.0 vs v7.2.0 的双人盲评协议——固定任务 T-AB1、评审记录单、
+  版本指纹与快照导出（`run_ab.sh`）。详见 [ab_review/README.md](ab_review/README.md)。
+- **`media_qa.py --media <文件> [规格参数]`**：对任意真实媒体做确定性测量
+  （分辨率 / 时长 / 编码 / 声道 / 积分响度 / 真峰值），逐项给出
+  `MEASURED_PASS / MEASURED_FAIL / NEEDS_HUMAN`；响度偏差超 ±0.5 LU 时
+  按协议 §6 提示二遍归一化。测量不等于观看，感官项永远待人工。
 
 ## P 规则与协议安全网的对应
 

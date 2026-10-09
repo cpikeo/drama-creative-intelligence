@@ -3,7 +3,7 @@ name: drama-creative-intelligence
 description: 导演级与作者级的剧集创作智能。用于从一句话、授权原著、剧本、分镜或成片出发，创作、续写、修改或生产 AI 漫剧、短剧、剧集、广告与电影；维护跨集记忆、世界状态、角色 DNA（含声音）与因果图谱，并对真实媒体做分层验收。
 license: Apache-2.0
 metadata:
-  version: 7.2.0
+  version: 7.2.1
   language: zh-CN
 ---
 

@@ -1,5 +1,43 @@
 # CHANGELOG
 
+## v7.2.1 — 验证基建：A/B 盲评台与媒体测量层
+
+技能内容（SKILL.md 与 references/）本轮**未改动**；全部变更在 verification/ 与版本号。对应下一步优先级 #1（搭台，评审待人）与 #3（测量层先行，创意媒体待工具）。
+
+### 1. 变更清单
+
+**新增**
+- `verification/ab_review/`：A/B 双人盲评协议——固定任务 [task.md](verification/ab_review/task.md)（T-AB1：同一一句话、同一口径，专门锻炼 v7.2.0 新增的视觉主张 / 电影摄影 / 表演层次 / 艺术方向 / 视效合成 / 空间声场能力，规格层产出，MEDIA/CUT 双版本均 PROVISIONAL）、[rater_sheet.md](verification/ab_review/rater_sheet.md)（双人独立、盲于版本、八维度、分歧记录、主持人解盲）、[run_ab.sh](verification/ab_review/run_ab.sh)（校验标签、输出版本指纹 sha256 + 度量、导出技能快照）、[README.md](verification/ab_review/README.md)（流程与诚实边界，含与优先级 #2 的联动：成本回收候选以 A/B 实测为前提）。
+- git 标签 `skill-v7.1.0`（d3567cb）、`skill-v7.2.0`（483a153）——A/B 可复现的版本锚点；指纹显示两版本仅 SKILL.md 与 creative-direction.md 不同，协议与 presentation 哈希完全一致（与 v7.2.0 变更记录相符）。
+- `verification/media_qa.py`：媒体测量层——ffmpeg 测量分辨率 / 时长 / 编码 / 声道 / 积分响度（LUFS）/ 真峰值（dBTP），逐项输出 `MEASURED_PASS / MEASURED_FAIL / NEEDS_HUMAN`；感官项恒为 NEEDS_HUMAN（对应 QA 的 PROVISIONAL）；响度偏差超 ±0.5 LU 时按协议 §6 提示二遍归一化。内置 `--selftest`：生成真实测试媒体（参考件 + 响度违规 + 分辨率违规），三件必过 / 必检出。ffmpeg 查找顺序：PATH → imageio-ffmpeg 静态二进制；缺失时标注未执行。
+- `run_all.sh` 新增第 5 步（媒体测量层自检）。
+
+**修复**
+- `rubric.md` §3：维度计数"七维度"→"八维度"（v7.2.0 新增美术与摄影维度后未同步）。
+- `lint.py`：`all_md` 跳过 `snapshots/`（A/B 生成快照不入库、不扫描）。
+- `.gitignore`：忽略 A/B 快照与媒体自检资产（二进制与生成物不入库）。
+
+**明确未执行（不伪造）**
+- **双人盲评本身**：需两名独立人类评审；本环境没有第二位评审，台子已搭好（任务、评审单、版本快照、流程），评审活动待人执行。
+- **真实创意媒体闭环**：无媒体生成工具；media_qa.py 已用合成测试媒体验证测量层，创意媒体的 MEDIA QA 仍待真实环境。
+- **优先级 #2（成本回收）**：以 A/B 实测为前提，A/B 未完成前不删。
+
+### 2. 度量
+
+技能文件（SKILL.md + references/）字节与 token 与 v7.2.0 **完全一致**（0 变化）；版本号三处统一为 7.2.1（R1 校验）。
+
+### 3. 测试记录（本轮实际执行）
+
+- `media_qa.py --selftest`：参考件全项 MEASURED_PASS（积分响度 −16.0 LUFS 精确命中目标，真峰值 −8.7 dBTP，1080x1920，10.0 s，h264/aac，单声道）；变异件 A 响度违规被检出（−9.8 LUFS，偏差 +6.2 LU，附二遍归一化提示）；变异件 B 分辨率违规被检出（1920x1080 ≠ 1080x1920）；感官项 5 项恒为 NEEDS_HUMAN。ffmpeg 来源：imageio-ffmpeg 静态二进制 v7.0.2（系统无 ffmpeg，apt 无权限）。
+- `run_ab.sh`：两个标签校验通过；版本指纹与快照导出成功；两版本度量与 CHANGELOG v7.2.0 §3 一致（13,192 → 13,670 tok）。
+- `run_all.sh` 全流程（五步）：R1–R4 通过（24 文件，含 ab_review 文档，快照正确跳过）；P1–P12 样例通过；5/5 变异检出；媒体测量层自检通过。
+
+### 4. 剩余风险
+
+1. 盲评待两名独立评审；评审员须先读 rubric.md §0（盲于版本、分歧 >1 必须讨论）。
+2. media_qa.py 的响度基于 ffmpeg ebur128（BS.1770），与协议 §6 口径（±0.5 LU）一致；真实平台响度计实现可能有小幅差异——以平台测量为准。
+3. A/B 仅覆盖规格层；媒体层的质量对比仍待真实环境（优先级 #3 的后半段）。
+
 ## v7.2.0 — 能力补全：摄影、美术、表演层次与视觉特效
 
 以新一轮角色界定（八项核心专业能力：原创叙事 / 导演表演 / 美术 / 摄影 / AI 图像视频与视效 / 剪辑声音 / 连续性 / 工业化交付）为标尺，逐项映射现有内容，补齐确认的缺口。不新增岗位、不新增章节文件，不堆砌规则；新增条款全部挂到已有章节，并用指针复用已有基线（高画质基线、反伪电影感），不重复。
