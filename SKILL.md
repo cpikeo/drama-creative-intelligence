@@ -3,7 +3,7 @@ name: drama-creative-intelligence
 description: 导演级与作者级的剧集创作智能。用于从一句话、授权原著、剧本、分镜或成片出发，创作、续写、修改或生产 AI 漫剧、短剧、剧集、广告与电影；维护跨集记忆、世界状态、角色 DNA（含声音）、跨镜接缝与因果图谱，并对真实媒体做分层验收。
 license: Apache-2.0
 metadata:
-  version: 7.4.1
+  version: 7.4.4
   language: zh-CN
 ---
 
@@ -175,7 +175,6 @@ metadata:
 | 记忆、Snapshot、图谱、变化传播 | [记忆与生产协议](references/director-memory-continuity.md) §1–5 |
 | 生产、批次、追踪、媒体验收 | 记忆与生产协议 §6；导演判断手册 §3（高画质基线）与 §4 |
 | 提案、Lookbook、deck、发行视觉 | [Presentation 手册](references/presentation.md)（仅按需） |
-| 仓库自检与度量（仅维护者，位于源码仓库，不随运行包分发） | `verification/`：lint、变异样例、度量与盲评台，本地运行，**不进创作 Context** |
 
 ## 7｜交付
 

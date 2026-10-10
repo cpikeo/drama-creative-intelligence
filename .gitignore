@@ -1,5 +1,0 @@
-__pycache__/
-*.pyc
-verification/ab_review/snapshots/
-verification/media_selftest/assets/
-dist/
