@@ -1,4 +1,4 @@
-# Director-Level → Author-Level Drama Creative Intelligence · v7.2.1
+# Director-Level → Author-Level Drama Creative Intelligence · v7.4.1
 
 一个导演级与作者级的剧集创作智能。以唯一的创作总监为中枢，维护跨集记忆、世界状态、角色 DNA（含声音）与因果图谱，用同一套判断完成故事、人物、镜头、声音、生产与验收，让每一集都建立在前集的真实后果之上。
 
@@ -11,6 +11,8 @@
 - **电影级视觉统筹**：一句话视觉主张、艺术方向（时代质感/材质/视觉层级）、电影摄影（画幅/曝光/透视/运动）、视觉特效与合成判断，拒绝无动机炫技。
 - **跨集不失忆**：六种真相（CANON、STATE、HISTORY、PROMISE、INTENT、HYPOTHESIS）分开存放；Snapshot 让下一集从上集的真实后果开始。
 - **角色与声音一致**：角色 DNA 六层（含 Voice DNA 与配音锁 LOCK）、行动门与变化规则，防止身份漂移。
+- **镜头连起来成立**：跨镜接缝（入点 / 出点、越轴与跨场依据）写进镜头卡并由 lint 校验；身份、空间、光态的跨镜漂移有责任层与最小修复，不以重复生成掩盖。
+- **世界状态不断裂**：固定物 / 可移动物 / 环境动态分开管理，物品变化须有动作或外力来源；关键动作写明起始、触发、过程与终态，未完成的动作跨镜从可衔接状态继续。
 - **变化只重查受影响的部分**：按依赖 ID 的闭包传播；`stale` 不等于重生成，能编辑的不重投。
 - **生产可追溯**：能力声明（设计、执行、验证分开）、按批次授权、失败归因与最小修复。
 - **真实媒体验收**：SPEC / MEDIA / CUT 三层 QA；没有观看或聆听的部分明确标 `PROVISIONAL`。
@@ -54,12 +56,27 @@ CHANGELOG.md                                变更、度量、测试记录、未
 LICENSE                                     Apache-2.0
 ```
 
+## 运行包与源码仓库
+
+- **运行包** = `SKILL.md` + `references/`（4 个文件）。创作时只加载这些，按任务按需读取章节。
+- **源码仓库** = 上述 + `verification/`。回归测试、变异样本、Token 度量、A/B 盲评台与
+  媒体测量自检都在这里，是改动技能包后唯一的回归保障。
+- 两者可以安全分离：`verification/` 对创作 Context 的 token 成本实测为 **0**
+  （技能文件从不命令创作时运行这些脚本；`SKILL.md` 也不再链接 `verification/`，
+  由 lint 的 R5 看住）。因此发布运行包时排除它不会损失任何创作能力，
+  但从仓库删除它会失去全部可复现验证。
+
+```bash
+bash verification/pack.sh      # 生成仅含技能文件的运行包（dist/skill-runtime，自洽可独立分发）
+bash verification/run_all.sh   # 源码仓库回归：lint + 10 个变异 + 度量 + 媒体测量自检
+```
+
 ## 版本与验证
 
 版本与完整变更记录见 [CHANGELOG.md](CHANGELOG.md)。
 
 随仓库交付的可复现验证见 [verification/](verification/README.md)：确定性 lint
-（仓库完整性 + 协议安全网）、5 个变异样本、度量脚本与盲评量表，一键运行：
+（仓库完整性 + 协议安全网 P1–P16）、10 个变异样本、度量脚本与盲评量表，一键运行：
 
 ```bash
 bash verification/run_all.sh

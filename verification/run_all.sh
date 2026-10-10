@@ -16,15 +16,15 @@ echo "- 性质: 全部确定性检查，零模型调用，零媒体费用"
 echo ""
 
 FAIL=0
-echo "== 1/5 仓库完整性（R1-R4，应全部通过）=="
+echo "== 1/5 仓库完整性（R1-R5，应全部通过）=="
 python3 lint.py --repo "$ROOT" || FAIL=1
 
 echo ""
-echo "== 2/5 样例项目安全网（P1-P12，应全部通过）=="
+echo "== 2/5 样例项目安全网（P1-P16，应全部通过）=="
 python3 lint.py --project fixtures/project || FAIL=1
 
 echo ""
-echo "== 3/5 变异测试（5 个已知缺陷，应全部检出）=="
+echo "== 3/5 变异测试（10 个已知缺陷，应全部检出）=="
 for d in fixtures/mutations/M*/; do
   name="$(basename "$d")"
   expect="$(cat "$d/EXPECT")"

@@ -1,44 +1,49 @@
 # 验证运行记录（verification/run_all.sh）
 
-- 日期: 2026-10-09 09:10 +0000
+- 日期: 2026-10-10 01:00 +0000
 - 环境: Python 3.13.16；tiktoken 0.14.0 (o200k_base)
 - 性质: 全部确定性检查，零模型调用，零媒体费用
 
-== 1/5 仓库完整性（R1-R4，应全部通过）==
+== 1/5 仓库完整性（R1-R5，应全部通过）==
 
-== 仓库完整性（R1-R4） ==
-结果: 全部通过（扫描 24 个文件，0 项失败）
+== 仓库完整性（R1-R5） ==
+结果: 全部通过（扫描 39 个文件，0 项失败）
 
-== 2/5 样例项目安全网（P1-P12，应全部通过）==
+== 2/5 样例项目安全网（P1-P16，应全部通过）==
 
-== 协议安全网（P1-P12）: /home/user/drama-creative-intelligence/verification/fixtures/project ==
+== 协议安全网（P1-P16）: /home/user/drama-creative-intelligence/verification/fixtures/project ==
 结果: 全部通过（扫描 2 个文件，0 项失败）
 
-== 3/5 变异测试（5 个已知缺陷，应全部检出）==
+== 3/5 变异测试（10 个已知缺陷，应全部检出）==
+  PASS  M10_action_stage_reset  检出规则 P16
   PASS  M1_promise_stage_skip  检出规则 P2
   PASS  M2_arrow_inside_segment  检出规则 P3
   PASS  M3_missing_fixed_chapter  检出规则 P1
   PASS  M4_dangling_basis_id  检出规则 P5
   PASS  M5_unwatched_media_approved  检出规则 P7
+  PASS  M6_dangling_seam_ref  检出规则 P13
+  PASS  M7_seam_not_reciprocated  检出规则 P13
+  PASS  M8_cross_scene_seam_without_transition  检出规则 P14
+  PASS  M9_prop_change_without_basis  检出规则 P15
 
 == 4/5 度量 ==
 ## 度量摘要
 
 | 文件 | 字节 | tokens | 规则词 |
 |---|---|---|---|
-| SKILL.md | 20337 | 5692 | 42 |
-| references/creative-direction.md | 14869 | 4310 | 35 |
-| references/director-memory-continuity.md | 10493 | 3021 | 14 |
+| SKILL.md | 21435 | 6025 | 42 |
+| references/creative-direction.md | 18829 | 5465 | 52 |
+| references/director-memory-continuity.md | 11082 | 3183 | 15 |
 | references/presentation.md | 2456 | 647 | 2 |
-| README.md | 4356 | 1172 | 1 |
-| CHANGELOG.md | 31138 | 10099 | 36 |
+| README.md | 5750 | 1582 | 2 |
+| CHANGELOG.md | 65518 | 21367 | 69 |
 
-- 技能文件合计: 48155 B / 13670 tok
-- 常驻 SKILL.md: 5692 tok；按需 references: 7978 tok
-- 典型任务（故事向）: 10002 tok；生产向: 8713 tok
-- 规则性措辞合计（技能文件）: 93
+- 技能文件合计: 53802 B / 15320 tok
+- 常驻 SKILL.md: 6025 tok；按需 references: 9295 tok
+- 典型任务（故事向）: 11490 tok；生产向: 9208 tok
+- 规则性措辞合计（技能文件）: 111
 - 跨文件重复规则句: 0 条
-- 跨文件共享 8 字短窗: 139 条（含规则词 0 条）
+- 跨文件共享 8 字短窗: 168 条（含规则词 0 条）
 - 失效链接: 0
 
 == 5/5 媒体测量层自检（需要 ffmpeg；缺失时标注未执行，不伪造结果）==

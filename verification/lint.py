@@ -4,8 +4,8 @@
 只做确定性检查，不做任何模型调用、不评作品质量。作品质量评价见 rubric.md（人工盲评）。
 
 用法:
-  python3 lint.py --repo <仓库根目录>                 # 仓库完整性（R1-R4）
-  python3 lint.py --project <项目目录>                # 协议安全网（P1-P12）
+  python3 lint.py --repo <仓库根目录>                 # 仓库完整性（R1-R5）
+  python3 lint.py --project <项目目录>                # 协议安全网（P1-P16）
 
 退出码: 0 全部通过；1 存在失败。输出每条失败的规则 ID、位置与证据。
 """
@@ -25,6 +25,7 @@ EP_CHAPTERS = ["场次与出去压力", "对白", "镜头卡", "变化记录", "
 
 ID_RE = re.compile(r"\b([A-Z]{2,6}(?:-[A-Z]{2,6})?-\d+)\b")
 PLAIN_ID_RE = re.compile(r"\b([A-Z]{2,6})-(\d+)\b")
+SHOT_ID_RE = re.compile(r"\bSH-\d+\b")
 
 
 class Report:
@@ -56,7 +57,7 @@ def all_md(root: Path):
                   if not ({".git", "__pycache__", "snapshots"} & set(p.parts)))
 
 
-# ---------------- 仓库完整性（R1-R4） ----------------
+# ---------------- 仓库完整性（R1-R5） ----------------
 
 def check_repo(root: Path) -> int:
     rep = Report()
@@ -130,6 +131,15 @@ def check_repo(root: Path) -> int:
                 if n not in secs:
                     rep.fail("R3", rel, f"引用 {sm.group(0)!r} → {target_rel} 无 §{n}")
 
+    # R5: 运行包自洽——技能文件不得链接 verification/（验证工具只属维护者，不进创作 Context）
+    for rel in skill_files:
+        text = read(root / rel)
+        for lm in re.finditer(r"\[[^\]]*\]\(([^)#][^)]*)\)", text):
+            if lm.group(1).strip().startswith("verification/"):
+                rep.fail("R5", rel,
+                         f"技能文件链接了验证目录: {lm.group(1)}"
+                         f"（verification/ 仅维护者使用，运行包不携带；请改为文字说明）")
+
     # R4: 关键概念保留（能力不因重构丢失）
     concepts_file = root / "verification" / "concepts.txt"
     if concepts_file.exists():
@@ -141,10 +151,18 @@ def check_repo(root: Path) -> int:
             if c not in skill_text:
                 rep.fail("R4", "verification/concepts.txt", f"关键概念在技能文件中缺失: {c}")
 
-    return rep.done("仓库完整性（R1-R4）")
+    return rep.done("仓库完整性（R1-R5）")
 
 
-# ---------------- 协议安全网（P1-P12） ----------------
+# ---------------- 协议安全网（P1-P16） ----------------
+
+# 接缝中"物品状态变化"的封闭词表（与手册 §3 静动逻辑一致；写不进词表的变化用 EVENT-/CHG- 描述）
+PROP_CHANGE_WORDS = ("拿起", "放下", "传递", "递交", "接过", "开门", "关门", "半开", "开启",
+                     "关上", "推开", "拉开", "破损", "破碎", "熄灭", "点燃", "翻倒", "掉落",
+                     "换到", "新增", "消失", "不见", "多出", "少了一个")
+# "动作未完成"的封闭标记（写进出点即承诺下一镜承接同一阶段）
+UNFINISHED_WORDS = ("未完成", "进行中", "中途")
+CARRIED_WORDS = ("未完成", "进行中", "中途", "半开", "继续")
 
 def collect_ids(files_text: dict):
     ids = set()
@@ -228,7 +246,7 @@ def check_project(root: Path) -> int:
                     rep.fail("P4", rel, f"前因引用了不存在的 ID: {tok}")
 
     # 解析镜头卡
-    shots = {}  # SH-ID -> {"basis": set, "func": str, "line": str, "file": rel}
+    shots = {}  # SH-ID -> basis/func/line/file + 接缝字段（sc/in/out/trans）
     for rel, text in ep_files.items():
         for line in text.splitlines():
             sm = re.match(r"^(SH-\d+)\s*·\s*(.*)$", line)
@@ -236,13 +254,27 @@ def check_project(root: Path) -> int:
                 continue
             sid, rest = sm.groups()
             fields = [f.strip() for f in rest.split(" · ")]
-            basis, func = set(), ""
+            basis, func, trans, seam_in, seam_out = set(), "", "", "", ""
             for f in fields:
-                if f.startswith("连续性依据："):
-                    basis = set(ID_RE.findall(f))
-                elif f.startswith("主功能："):
-                    func = f[len("主功能："):]
-            shots[sid] = {"basis": basis, "func": func, "line": line, "file": rel}
+                for lab in ("连续性依据", "主功能", "转场", "入点", "出点"):
+                    idx = f.find(lab + "：")
+                    if idx == -1:
+                        continue
+                    val = f[idx + len(lab) + 1:]
+                    if lab == "连续性依据":
+                        basis = set(ID_RE.findall(val))
+                    elif lab == "主功能":
+                        func = val
+                    elif lab == "转场":
+                        trans = val
+                    elif lab == "入点":
+                        seam_in = val
+                    else:
+                        seam_out = val
+            sc = re.search(r"\bSC-\d+", fields[0]) if fields else None
+            shots[sid] = {"basis": basis, "func": func, "line": line, "file": rel,
+                          "sc": sc.group(0) if sc else "",
+                          "in": seam_in, "out": seam_out, "trans": trans}
 
     # P5: 对白依据存在且被所属镜头的连续性依据覆盖
     for rel, text in ep_files.items():
@@ -263,12 +295,71 @@ def check_project(root: Path) -> int:
                 elif b not in shots[sid]["basis"]:
                     rep.fail("P5", rel, f"对白依据 {b} 未被 {sid} 的连续性依据覆盖")
 
-    # P11/P12: 每镜有职责、连续性依据非空
+    # P11/P12/P13/P14: 每镜有职责、连续性依据非空、跨镜接缝可追溯
     for sid, info in shots.items():
         if not info["func"]:
             rep.fail("P11", info["file"], f"{sid} 缺主功能（每镜须有职责）")
         if not info["basis"]:
             rep.fail("P12", info["file"], f"{sid} 连续性依据为空")
+
+    # P13: 接缝字段齐备、引用存在、出点与入点双向回指
+    for sid, info in shots.items():
+        if not info["in"]:
+            rep.fail("P13", info["file"], f"{sid} 缺入点（跨镜接缝：承接哪一镜）")
+        if not info["out"]:
+            rep.fail("P13", info["file"], f"{sid} 缺出点（跨镜接缝：交给哪一镜）")
+        for r in set(SHOT_ID_RE.findall(info["in"])) | set(SHOT_ID_RE.findall(info["out"])):
+            if r not in shots:
+                rep.fail("P13", info["file"], f"{sid} 接缝引用了不存在的镜头: {r}")
+        for r in set(SHOT_ID_RE.findall(info["out"])):
+            tgt = shots.get(r)
+            if tgt is None or "有意断裂" in tgt["in"]:
+                continue
+            if sid not in set(SHOT_ID_RE.findall(tgt["in"])):
+                rep.fail("P13", info["file"],
+                         f"{sid} 出点指向 {r}，但 {r} 的入点未回指本镜"
+                         f"（须在 {r} 入点声明有意断裂与回归锚点）")
+
+    # P14: 跨场接缝须有依据（转场性质或事件/变更 ID），否则跨镜变化无出处
+    TRANSITION_WORDS = ("硬切", "静帧", "留黑", "匹配", "声音桥", "省略", "重建空间",
+                        "时空转换", "主观", "跳切", "非线性")
+    for sid, info in shots.items():
+        for r in set(SHOT_ID_RE.findall(info["in"])):
+            tgt = shots.get(r)
+            if tgt is None or not tgt["sc"] or not info["sc"] or tgt["sc"] == info["sc"]:
+                continue
+            declared = any(w in (info["in"] + info["trans"]) for w in TRANSITION_WORDS) \
+                or bool(re.search(r"(EVENT|CHG|DEC)-\d+", info["in"] + info["trans"]))
+            if not declared:
+                rep.fail("P14", info["file"],
+                         f"{sid} 承接 {tgt['sc']} 的 {r} 却未声明转场性质或事件依据"
+                         f"（跨镜变化须有叙事或剪辑依据）")
+
+    # P15: 接缝中的物品状态变化须挂来源 ID（无来源的物品变化不成立）
+    for sid, info in shots.items():
+        for label, txt in (("入点", info["in"]), ("出点", info["out"])):
+            if not txt:
+                continue
+            if re.search(r"\bPROP-\d+\b", txt) and any(w in txt for w in PROP_CHANGE_WORDS) \
+               and not re.search(r"(EVENT|CHG|DEC)-\d+", txt):
+                rep.fail("P15", info["file"],
+                         f"{sid} {label}出现物品状态变化却未挂来源 ID"
+                         f"（PROP 变化须有事件、变更或决定依据）")
+
+    # P16: 动作阶段须写明；出点未完成的动作，下一镜入点须承接同一阶段
+    for sid, info in shots.items():
+        for label, txt in (("入点", info["in"]), ("出点", info["out"])):
+            if txt and "动作阶段" not in txt:
+                rep.fail("P16", info["file"], f"{sid} {label}缺动作阶段（动作跨镜须可衔接）")
+        for r in set(SHOT_ID_RE.findall(info["out"])):
+            tgt = shots.get(r)
+            if tgt is None or "有意断裂" in tgt["in"]:
+                continue
+            if any(w in info["out"] for w in UNFINISHED_WORDS) and \
+               not any(w in tgt["in"] for w in CARRIED_WORDS):
+                rep.fail("P16", info["file"],
+                         f"{sid} 出点动作未完成，但 {r} 的入点未承接同一动作阶段"
+                         f"（不得从已完成状态开始）")
 
     # P8: 进入生成的镜头须有三块规格
     for rel, text in ep_files.items():
@@ -337,7 +428,7 @@ def check_project(root: Path) -> int:
         if len(where) > 1:
             rep.fail("P6", ",".join(where), f"节点重复定义: {tok}")
 
-    return rep.done(f"协议安全网（P1-P12）: {root}")
+    return rep.done(f"协议安全网（P1-P16）: {root}")
 
 
 def main():

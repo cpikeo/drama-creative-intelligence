@@ -3,10 +3,10 @@
   "token_estimation": "o200k_base",
   "files": {
     "SKILL.md": {
-      "bytes": 21401,
+      "bytes": 21435,
       "lines": 190,
-      "chars": 9458,
-      "tokens": 6010,
+      "chars": 9456,
+      "tokens": 6025,
       "rule_words": {
         "必须": 11,
         "禁止": 1,
@@ -63,10 +63,10 @@
       }
     },
     "README.md": {
-      "bytes": 4818,
-      "lines": 77,
-      "chars": 2374,
-      "tokens": 1305,
+      "bytes": 5750,
+      "lines": 92,
+      "chars": 2876,
+      "tokens": 1582,
       "rule_words": {
         "必须": 0,
         "禁止": 0,
@@ -78,30 +78,30 @@
       }
     },
     "CHANGELOG.md": {
-      "bytes": 60866,
-      "lines": 627,
-      "chars": 30038,
-      "tokens": 19919,
+      "bytes": 65518,
+      "lines": 676,
+      "chars": 32605,
+      "tokens": 21367,
       "rule_words": {
         "必须": 7,
         "禁止": 2,
-        "不得": 7,
+        "不得": 8,
         "不可": 20,
-        "须": 28,
+        "须": 29,
         "必": 3,
-        "合计": 67
+        "合计": 69
       }
     }
   },
   "totals": {
-    "skill_files_bytes": 53768,
-    "skill_files_tokens": 15305,
-    "resident_SKILL_tokens": 6010,
+    "skill_files_bytes": 53802,
+    "skill_files_tokens": 15320,
+    "resident_SKILL_tokens": 6025,
     "on_demand_references_tokens": 9295,
     "rule_words_SKILL": 42,
     "rule_words_all_skill": 111,
-    "typical_story_task_tokens": 11475,
-    "typical_production_task_tokens": 9193
+    "typical_story_task_tokens": 11490,
+    "typical_production_task_tokens": 9208
   },
   "duplication": {
     "cross_file_rule_sentences": {},
